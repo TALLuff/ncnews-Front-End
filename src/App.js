@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./style.css";
+import Header from "./components/Header";
+import Articles from "./components/Articles";
+import SingleArticle from "./components/SingleArticle";
+import { Router } from "@reach/router";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    loggedInName: null,
+    userUsername: null,
+    userPicture: null
+  };
+
+  logInUser = user => {
+    this.setState({
+      loggedInName: user.name,
+      userPicture: user.avatar_url,
+      userUsername: user.username
+    });
+  };
+
+  logOutUser = () => {
+    this.setState({
+      loggedInName: null,
+      userPicture: null,
+      userUsername: null
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <Header
+          loggedInName={this.state.loggedInName}
+          userPicture={this.state.userPicture}
+          logInUser={this.logInUser}
+          logOutUser={this.logOutUser}
+        />
+        <Router>
+          <Articles path="/" />
+          <SingleArticle
+            path="/:article_id"
+            userUsername={this.state.userUsername}
+          />
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;

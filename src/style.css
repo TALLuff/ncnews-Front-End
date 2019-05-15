@@ -1,0 +1,73 @@
+body {
+  font-family: "Antic";
+  text-decoration: none;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#ncnewsTitle {
+  color: black;
+  font-size: 250%;
+  padding: 0px;
+  margin: 0px;
+}
+
+#loginInputs {
+  display: flex;
+  flex-direction: column;
+}
+
+#loginForm {
+  display: flex;
+}
+
+.red {
+  color: red;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2% 0% 2% 0%;
+  padding: 1%;
+  background-color: rgb(244, 237, 250);
+}
+
+.listItemTitle {
+  margin: 0px;
+  color: black;
+}
+
+.voteButtons {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.votes {
+  text-align: center;
+}
+
+.arrow {
+  text-align: center;
+  font-size: 8px;
+}
+
+#loggedIn {
+  display: flex;
+  align-items: center;
+}
+
+#userAvatar {
+  align-self: center;
+  height: 3.5em;
+}
+
+#ncnewsTitle {
+  align-self: center;
+  height: 1.5em;
+}
