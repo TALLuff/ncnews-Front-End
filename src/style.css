@@ -1,16 +1,43 @@
 body {
   font-family: "Antic";
   text-decoration: none;
+  margin: 0px;
+}
+
+a,
+a:active,
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+#background {
+  background-image: url("https://artwallbazaar.com/wp-content/uploads/dancing-arrows-geometric-pattern-wallpaper-mural-black-white.jpg");
+  background-size: 200px;
+  opacity: 0.03;
+  position: fixed;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+}
+
+#content {
+  padding: 1% 5% 1% 5%;
 }
 
 #header {
   display: flex;
   justify-content: space-between;
+  margin: 0px 0px 10px 0px;
+}
+
+@media screen and (max-width: 640px) {
+  #header {
+    flex-direction: column;
+  }
 }
 
 #ncnewsTitle {
-  color: black;
-  font-size: 250%;
   padding: 0px;
   margin: 0px;
 }
@@ -25,7 +52,7 @@ body {
 }
 
 .red {
-  color: red;
+  color: rgb(255, 0, 0);
 }
 
 .listItem {
@@ -34,14 +61,25 @@ body {
   align-items: center;
   margin: 2% 0% 2% 0%;
   padding: 1%;
-  background-color: rgb(244, 237, 250);
+  background-color: rgba(48, 48, 48, 0.555);
+  color: white;
+  border-left: 2px solid red;
 }
 
 .listItemTitle {
   margin: 0px;
-  color: black;
+  color: rgb(235, 235, 235);
 }
 
+.commentTitle {
+  margin: 0px;
+}
+
+.listItemTitle:hover {
+  color: rgb(255, 255, 255);
+  position: relative;
+  left: 5px;
+}
 .voteButtons {
   display: flex;
   flex-direction: column;
@@ -54,12 +92,29 @@ body {
 
 .arrow {
   text-align: center;
-  font-size: 8px;
+  font-size: 12px;
+  border: 0;
+  background-color: rgb(250, 250, 250);
+  padding: 5px 8px 5px 8px;
+  margin: 0px 5px 0px 5px;
+}
+
+.arrow:hover {
+  background-color: rgb(211, 211, 211);
+}
+
+.clickedArrow {
+  background-color: rgb(248, 83, 83);
+}
+
+.clickedArrow:hover {
+  background-color: rgb(189, 46, 46);
 }
 
 #loggedIn {
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 #userAvatar {
@@ -69,5 +124,63 @@ body {
 
 #ncnewsTitle {
   align-self: center;
-  height: 1.5em;
+  height: 3.5em;
+}
+
+#postComment {
+  display: flex;
+}
+
+#postCommentInput {
+  display: flex;
+  width: 100vw;
+}
+
+#footer {
+  bottom: 0px;
+  height: 3.5em;
+  text-align: center;
+  padding: 10px;
+}
+
+#logo {
+  height: 1em;
+}
+
+#queries {
+  display: flex;
+}
+
+#queryForm {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.restyle {
+  border: 0;
+  padding: 5px 8px 5px 8px;
+  margin: 0px;
+  background-color: rgb(250, 250, 250);
+  border: 1px solid rgb(179, 179, 179);
+}
+
+#topicSelected {
+  margin: 0px 10px 0px 0px;
+}
+
+.restyle:hover {
+  background-color: rgb(211, 211, 211);
+}
+
+.redLeft {
+  border-left: 2px solid red;
+}
+
+#loggedInText {
+  padding: 0px 5px 0px 5px;
+}
+
+#not-found {
+  text-align: center;
+  padding: 20px;
 }

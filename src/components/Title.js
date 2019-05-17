@@ -7,7 +7,6 @@ function Title() {
     <div>
       <Link to="/">
         <img src={ncnewsTitle} alt="ncnewsTitle" id="ncnewsTitle" />
-        {/* <span className="red">N</span>C-NEWS */}
       </Link>
     </div>
   );

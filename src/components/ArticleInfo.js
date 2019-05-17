@@ -1,19 +1,23 @@
 import React from "react";
+import ArticleButtons from "./ArticleButtons";
 
-function ArticleInfo({ article }) {
+function ArticleInfo({ article, incrementVote, userUsername }) {
   return (
     <div className="listItem">
       <div>
-        <h2>{article.title}</h2>
+        <h2>
+          <span className="red">></span>
+          {article.title.slice(0)}
+        </h2>
         Author: {article.author}, Created: {article.created_at.slice(0, 10)},
         Comments: {article.comment_count}, Votes: {article.votes}
         <p>{article.body}</p>
       </div>
-      <div className="voteButtons">
-        <button className="arrow">/\</button>
-        <div className="votes">{article.votes}</div>
-        <button className="arrow">\/</button>
-      </div>
+      {userUsername ? (
+        <ArticleButtons article={article} incrementVote={incrementVote} />
+      ) : (
+        <div />
+      )}
     </div>
   );
 }

@@ -17,14 +17,21 @@ class PostComment extends React.Component {
           onSubmit={event => {
             event.preventDefault();
             postNewComment(this.state.commentBody);
+            this.setState({ commentBody: "" });
           }}
+          id="postComment"
         >
           <textarea
             placeholder="Comment description"
             onChange={event => this.updateInput(event)}
             required
+            id="postCommentInput"
+            className="restyle"
+            value={this.state.commentBody}
           />
-          <button type="submit">Submit</button>
+          <button type="submit" className="restyle">
+            Submit
+          </button>
         </form>
       </div>
     ) : (

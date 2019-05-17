@@ -1,0 +1,93 @@
+import React from "react";
+
+class ArticleButtons extends React.Component {
+  state = {
+    votes: null,
+    recentVote: null
+  };
+
+  changeLocalStore = () => {
+    const storedVote = JSON.parse(window.localStorage.getItem("articles"))[
+      this.props.article.article_id
+    ];
+    if (storedVote) {
+      this.setState({
+        recentVote: storedVote
+      });
+    }
+  };
+
+  componentDidMount() {
+    this.setState({ votes: this.props.article.votes });
+  }
+
+  render() {
+    const { article, incrementVote } = this.props;
+    const { recentVote, votes } = this.state;
+    return (
+      <div className="voteButtons">
+        <button
+          className={"arrow " + (recentVote === 1 ? "clickedArrow" : "")}
+          onClick={() => {
+            if (recentVote === null) {
+              this.setState({ votes: votes + 1, recentVote: 1 });
+              incrementVote(1, "articles", article.article_id);
+              window.localStorage.setItem(
+                "articles",
+                JSON.stringify({ [article.article_id]: 1 })
+              );
+            } else if (recentVote === 1) {
+              this.setState({ votes: votes - 1, recentVote: null });
+              incrementVote(-1, "articles", article.article_id);
+              window.localStorage.setItem(
+                "articles",
+                JSON.stringify({ [article.article_id]: null })
+              );
+            } else if (recentVote === -1) {
+              this.setState({ votes: votes + 2, recentVote: 1 });
+              incrementVote(+2, "articles", article.article_id);
+              window.localStorage.setItem(
+                "articles",
+                JSON.stringify({ [article.article_id]: 1 })
+              );
+            }
+          }}
+        >
+          /\
+        </button>
+        <div className="votes">{votes}</div>
+        <button
+          className={"arrow " + (recentVote === -1 ? "clickedArrow" : "")}
+          onClick={() => {
+            if (recentVote === null) {
+              this.setState({ votes: votes - 1, recentVote: -1 });
+              incrementVote(-1, "articles", article.article_id);
+              window.localStorage.setItem(
+                "articles",
+                JSON.stringify({ [article.article_id]: -1 })
+              );
+            } else if (recentVote === -1) {
+              this.setState({ votes: votes + 1, recentVote: null });
+              incrementVote(+1, "articles", article.article_id);
+              window.localStorage.setItem(
+                "articles",
+                JSON.stringify({ [article.article_id]: null })
+              );
+            } else if (recentVote === 1) {
+              this.setState({ votes: votes - 2, recentVote: -1 });
+              incrementVote(-2, "articles", article.article_id);
+              window.localStorage.setItem(
+                "articles",
+                JSON.stringify({ [article.article_id]: -1 })
+              );
+            }
+          }}
+        >
+          \/
+        </button>
+      </div>
+    );
+  }
+}
+
+export default ArticleButtons;

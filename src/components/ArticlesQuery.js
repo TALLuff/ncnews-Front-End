@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { fetchTopics } from "../api";
 
 class ArticlesQuery extends React.Component {
   state = {
@@ -9,10 +9,11 @@ class ArticlesQuery extends React.Component {
   };
 
   componentDidMount() {
-    const url = `https://nc-news-northcoders.herokuapp.com/api/topics`;
-    axios.get(url).then(({ data: { topics } }) => {
-      this.setState({ topics });
-    });
+    fetchTopics()
+      .then(topics => {
+        this.setState({ topics });
+      })
+      .catch(console.log);
   }
 
   storeInput = event => {
@@ -31,8 +32,9 @@ class ArticlesQuery extends React.Component {
     const { topics } = this.state;
     const { specifyArticles } = this.props;
     return (
-      <div>
+      <div id="queries">
         <form
+          id="queryForm"
           onSubmit={event => {
             event.preventDefault();
             specifyArticles({
@@ -41,10 +43,47 @@ class ArticlesQuery extends React.Component {
             });
           }}
         >
+          <select id="sorts" className="restyle redLeft">
+            <option disabled>Sort by</option>
+            <option
+              onClick={() =>
+                specifyArticles({
+                  sort_by: "created_at",
+                  topic: this.state.topicSelected,
+                  author: this.state.userSearch
+                })
+              }
+            >
+              Date Created
+            </option>
+            <option
+              onClick={() =>
+                specifyArticles({
+                  sort_by: "comment_count",
+                  topic: this.state.topicSelected,
+                  author: this.state.userSearch
+                })
+              }
+            >
+              Comment Count
+            </option>
+            <option
+              onClick={() =>
+                specifyArticles({
+                  sort_by: "votes",
+                  topic: this.state.topicSelected,
+                  author: this.state.userSearch
+                })
+              }
+            >
+              Vote Count
+            </option>
+          </select>
           <select
             defaultValue="Articles by Topic"
             onChange={this.storeInputDropdown}
             id="topicSelected"
+            className="restyle"
           >
             <option disabled>Articles by Topic</option>
             <option>All</option>
@@ -58,45 +97,12 @@ class ArticlesQuery extends React.Component {
             placeholder="Articles by User"
             onChange={this.storeInput}
             id="userSearch"
+            className="restyle redLeft"
           />
-          <button type="submit">Search</button>
+          <button type="submit" className="restyle">
+            Search
+          </button>
         </form>
-        <div id="sorts">
-          Sort by:
-          <button
-            onClick={() =>
-              specifyArticles({
-                sort_by: "created_at",
-                topic: this.state.topicSelected,
-                author: this.state.userSearch
-              })
-            }
-          >
-            Date Created
-          </button>
-          <button
-            onClick={() =>
-              specifyArticles({
-                sort_by: "comment_count",
-                topic: this.state.topicSelected,
-                author: this.state.userSearch
-              })
-            }
-          >
-            Comment Count
-          </button>
-          <button
-            onClick={() =>
-              specifyArticles({
-                sort_by: "votes",
-                topic: this.state.topicSelected,
-                author: this.state.userSearch
-              })
-            }
-          >
-            Vote Count
-          </button>
-        </div>
       </div>
     );
   }

@@ -2,17 +2,15 @@ import React from "react";
 import Title from "./Title";
 import Login from "./Login";
 import LoggedIn from "./LoggedIn";
-import axios from "axios";
+import { fetchUser } from "../api";
 
 class Header extends React.Component {
   attemptLogin = (username, password) => {
     if (password !== "password") {
       alert("Invalid Login Details");
     } else {
-      const url = `https://nc-news-northcoders.herokuapp.com/api/users/${username}`;
-      axios
-        .get(url)
-        .then(({ data: { user } }) => {
+      fetchUser(username)
+        .then(user => {
           this.props.logInUser(user);
         })
         .catch(() => {

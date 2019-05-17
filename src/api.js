@@ -1,0 +1,59 @@
+const axios = require("axios");
+
+exports.fetchArticles = async (query = undefined) => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/articles`;
+  const {
+    data: { articles }
+  } = await axios.get(url, { params: query });
+  return articles;
+};
+
+exports.fetchTopics = async () => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/topics`;
+  const {
+    data: { topics }
+  } = await axios.get(url);
+  return topics;
+};
+
+exports.fetchUser = async username => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/users/${username}`;
+  const {
+    data: { user }
+  } = await axios.get(url);
+  return user;
+};
+
+exports.fetchArticleById = async id => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/articles/${id}`;
+  const {
+    data: { article }
+  } = await axios.get(url);
+  return article;
+};
+
+exports.fetchArticlesComments = async id => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/articles/${id}/comments`;
+  const {
+    data: { comments }
+  } = await axios.get(url);
+  return comments;
+};
+
+exports.createArticleComment = async (id, commentInput) => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/articles/${id}/comments`;
+  const {
+    data: { comment }
+  } = await axios.post(url, commentInput);
+  return [comment];
+};
+
+exports.removeArticleComment = async id => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/comments/${id}`;
+  axios.delete(url);
+};
+
+exports.updateVote = async (type, id, inc) => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/${type}/${id}`;
+  axios.patch(url, inc);
+};

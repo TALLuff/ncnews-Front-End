@@ -1,25 +1,30 @@
 import React from "react";
+import CommentButtons from "./CommentButtons";
 
-function CommentsList({ comments, showDeleteQuery }) {
+function CommentsList({
+  comments,
+  showDeleteQuery,
+  incrementVote,
+  userUsername
+}) {
   return (
     <div>
-      <h4>Comments:</h4>
       {comments.map(comment => {
         return (
           <div key={comment.comment_id} className="listItem">
             <div>
-              <h5 className="listItemTitle">
+              <h5 className="commentTitle">
                 {comment.author}: {comment.created_at.slice(0, 10)}, Votes:{" "}
                 {comment.votes}
               </h5>
               <p>{comment.body}</p>
               {showDeleteQuery(comment.author, comment.comment_id)}
             </div>
-            <div className="voteButtons">
-              <button className="arrow">/\</button>
-              <div className="votes">{comment.votes}</div>
-              <button className="arrow">\/</button>
-            </div>
+            {userUsername ? (
+              <CommentButtons comment={comment} incrementVote={incrementVote} />
+            ) : (
+              <div />
+            )}
           </div>
         );
       })}

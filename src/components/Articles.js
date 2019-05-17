@@ -1,7 +1,7 @@
 import React from "react";
-import axios from "axios";
 import ArticlesQuery from "./ArticlesQuery";
 import ArticlesList from "./ArticlesList";
+import { fetchArticles } from "../api";
 
 class Articles extends React.Component {
   state = {
@@ -9,18 +9,19 @@ class Articles extends React.Component {
   };
 
   componentDidMount() {
-    axios
-      .get("https://nc-news-northcoders.herokuapp.com/api/articles")
-      .then(({ data: { articles } }) => {
+    fetchArticles()
+      .then(articles => {
         this.setState({ articles });
-      });
+      })
+      .catch(console.log);
   }
 
   specifyArticles = query => {
-    const url = `https://nc-news-northcoders.herokuapp.com/api/articles`;
-    axios.get(url, { params: query }).then(({ data: { articles } }) => {
-      this.setState({ articles });
-    });
+    fetchArticles(query)
+      .then(articles => {
+        this.setState({ articles });
+      })
+      .catch(console.log);
   };
 
   render() {
