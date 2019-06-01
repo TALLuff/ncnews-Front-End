@@ -1,7 +1,9 @@
 import React from "react";
 import ArticlesQuery from "./ArticlesQuery";
+import PostArticle from "./PostArticle";
 import ArticlesList from "./ArticlesList";
-import { fetchArticles } from "../api";
+import { fetchArticles, createArticle } from "../api";
+import { navigate } from "@reach/router";
 
 class Articles extends React.Component {
   state = {
@@ -24,11 +26,28 @@ class Articles extends React.Component {
       .catch(console.log);
   };
 
+  postNewArticle = (title, topic, body) => {
+    let articleInfo = {
+      title,
+      author: this.props.userUsername,
+      topic,
+      body
+    };
+    createArticle(articleInfo).then(([article]) => {
+      console.log(article);
+      navigate(`/articles/${article.article_id}`);
+    });
+  };
+
   render() {
     const { articles } = this.state;
     return articles ? (
       <div>
         <ArticlesQuery specifyArticles={this.specifyArticles} />
+        <PostArticle
+          userUsername={this.props.userUsername}
+          postNewArticle={this.postNewArticle}
+        />
         <ArticlesList articles={articles} />
       </div>
     ) : (

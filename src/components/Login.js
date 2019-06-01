@@ -26,13 +26,14 @@ class Login extends React.Component {
               placeholder="Enter username"
               onChange={e => this.updateInput(e.target.value, "usernameInput")}
               required
-              className="restyle redLeft"
+              className="restyle"
             />
             <input
+              type="password"
               placeholder="Enter password"
               onChange={e => this.updateInput(e.target.value, "passwordInput")}
               required
-              className="restyle redLeft"
+              className="restyle"
             />
           </div>
           <button type="submit" className="restyle">

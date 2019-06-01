@@ -13,13 +13,14 @@ class PostComment extends React.Component {
     const { userUsername, postNewComment } = this.props;
     return userUsername ? (
       <div>
+        Post Comment:
         <form
           onSubmit={event => {
             event.preventDefault();
             postNewComment(this.state.commentBody);
             this.setState({ commentBody: "" });
           }}
-          id="postComment"
+          id="postBody"
         >
           <textarea
             placeholder="Comment description"

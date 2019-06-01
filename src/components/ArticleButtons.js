@@ -6,19 +6,32 @@ class ArticleButtons extends React.Component {
     recentVote: null
   };
 
-  changeLocalStore = () => {
-    const storedVote = JSON.parse(window.localStorage.getItem("articles"))[
-      this.props.article.article_id
-    ];
-    if (storedVote) {
-      this.setState({
-        recentVote: storedVote
-      });
-    }
+  changeLocalStore = value => {
+    window.localStorage.setItem(
+      `${this.props.userUsername}-articles-${this.props.article.article_id}`,
+      value
+    );
   };
 
   componentDidMount() {
-    this.setState({ votes: this.props.article.votes });
+    const storedVote = JSON.parse(
+      window.localStorage.getItem(
+        `${this.props.userUsername}-articles-${this.props.article.article_id}`
+      )
+    );
+    if (!storedVote) {
+      window.localStorage.setItem(
+        `${this.props.userUsername}-articles-${this.props.article.article_id}`,
+        "null"
+      );
+    } else {
+      this.setState({
+        recentVote: JSON.parse(storedVote)
+      });
+    }
+    this.setState({
+      votes: this.props.article.votes
+    });
   }
 
   render() {
@@ -32,24 +45,15 @@ class ArticleButtons extends React.Component {
             if (recentVote === null) {
               this.setState({ votes: votes + 1, recentVote: 1 });
               incrementVote(1, "articles", article.article_id);
-              window.localStorage.setItem(
-                "articles",
-                JSON.stringify({ [article.article_id]: 1 })
-              );
+              this.changeLocalStore(1);
             } else if (recentVote === 1) {
               this.setState({ votes: votes - 1, recentVote: null });
               incrementVote(-1, "articles", article.article_id);
-              window.localStorage.setItem(
-                "articles",
-                JSON.stringify({ [article.article_id]: null })
-              );
+              this.changeLocalStore(null);
             } else if (recentVote === -1) {
               this.setState({ votes: votes + 2, recentVote: 1 });
               incrementVote(+2, "articles", article.article_id);
-              window.localStorage.setItem(
-                "articles",
-                JSON.stringify({ [article.article_id]: 1 })
-              );
+              this.changeLocalStore(1);
             }
           }}
         >
@@ -62,24 +66,15 @@ class ArticleButtons extends React.Component {
             if (recentVote === null) {
               this.setState({ votes: votes - 1, recentVote: -1 });
               incrementVote(-1, "articles", article.article_id);
-              window.localStorage.setItem(
-                "articles",
-                JSON.stringify({ [article.article_id]: -1 })
-              );
+              this.changeLocalStore(-1);
             } else if (recentVote === -1) {
               this.setState({ votes: votes + 1, recentVote: null });
               incrementVote(+1, "articles", article.article_id);
-              window.localStorage.setItem(
-                "articles",
-                JSON.stringify({ [article.article_id]: null })
-              );
+              this.changeLocalStore(null);
             } else if (recentVote === 1) {
               this.setState({ votes: votes - 2, recentVote: -1 });
               incrementVote(-2, "articles", article.article_id);
-              window.localStorage.setItem(
-                "articles",
-                JSON.stringify({ [article.article_id]: -1 })
-              );
+              this.changeLocalStore(-1);
             }
           }}
         >

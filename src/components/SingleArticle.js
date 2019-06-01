@@ -8,7 +8,8 @@ import {
   fetchArticlesComments,
   createArticleComment,
   removeArticleComment,
-  updateVote
+  updateVote,
+  removeArticle
 } from "../api";
 
 class SingleArticle extends React.Component {
@@ -54,16 +55,29 @@ class SingleArticle extends React.Component {
       });
   }
 
-  showDeleteQuery = (commentUser, comment_id) => {
-    if (this.props.userUsername === commentUser) {
-      return (
-        <button
-          className="restyle"
-          onClick={() => this.deleteComment(comment_id)}
-        >
-          Delete
-        </button>
-      );
+  showDeleteQuery = (user, id, type) => {
+    if (type === "comment") {
+      if (this.props.userUsername === user) {
+        return (
+          <button
+            className="restyle deleteButton"
+            onClick={() => this.deleteComment(id)}
+          >
+            Delete
+          </button>
+        );
+      }
+    } else if ((type = "article")) {
+      if (this.props.userUsername === user) {
+        return (
+          <button
+            className="restyle deleteButton"
+            onClick={() => this.deleteArticle(id)}
+          >
+            Delete
+          </button>
+        );
+      }
     }
   };
 
@@ -78,9 +92,17 @@ class SingleArticle extends React.Component {
   };
 
   deleteComment = comment_id => {
-    removeArticleComment(comment_id).then(
-      this.setState({ needsUpdate: true, deletedCommentId: comment_id })
-    );
+    removeArticleComment(comment_id).then(() => {
+      alert("Comment deleted");
+      this.setState({ needsUpdate: true, deletedCommentId: comment_id });
+    });
+  };
+
+  deleteArticle = article_id => {
+    removeArticle(article_id).then(() => {
+      alert("Article deleted");
+      navigate("/", { replace: true });
+    });
   };
 
   incrementVote = (increment, type, id) => {
@@ -99,8 +121,8 @@ class SingleArticle extends React.Component {
           article={article}
           incrementVote={this.incrementVote}
           userUsername={userUsername}
+          showDeleteQuery={this.showDeleteQuery}
         />
-        <h4>Comments:</h4>
         <PostComment
           userUsername={userUsername}
           postNewComment={this.postNewComment}

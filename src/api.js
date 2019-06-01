@@ -57,3 +57,16 @@ exports.updateVote = async (type, id, inc) => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/${type}/${id}`;
   axios.patch(url, inc);
 };
+
+exports.createArticle = async articleInput => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/articles`;
+  const {
+    data: { article }
+  } = await axios.post(url, articleInput);
+  return [article];
+};
+
+exports.removeArticle = async id => {
+  const url = `https://nc-news-northcoders.herokuapp.com/api/articles/${id}`;
+  axios.delete(url);
+};

@@ -4,20 +4,21 @@ import { Link } from "@reach/router";
 function Title({ loggedInName, userPicture, logOutUser }) {
   return (
     <div id="loggedIn">
-      <img src={userPicture} alt="avatar_url" id="userAvatar" />
-      <span id="loggedInText">
+      {/* <span id="loggedInText">
         {" "}
         Welcome back
         <br /> {loggedInName}{" "}
-      </span>
+      </span> */}
       <div>
-        <button onClick={() => logOutUser()} className="restyle redLeft">
+        <span className="restyleNo">{loggedInName}</span>
+        <button onClick={() => logOutUser()} className="restyle">
           Log Out
         </button>
         <Link to="/userArticles">
           <button className="restyle">My Articles</button>
         </Link>
       </div>
+      <img src={userPicture} alt="avatar_url" id="userAvatar" />
     </div>
   );
 }

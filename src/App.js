@@ -21,7 +21,7 @@ class App extends React.Component {
       userPicture: user.avatar_url,
       userUsername: user.username
     });
-    const userStore = { userInfo: this.state };
+    const userStore = this.state;
     window.localStorage.setItem("user", JSON.stringify(userStore));
   };
 
@@ -32,17 +32,18 @@ class App extends React.Component {
       userUsername: null
     });
     const userStore = {
-      userInfo: {
-        loggedInName: null,
-        userPicture: null,
-        userUsername: null
-      }
+      loggedInName: null,
+      userPicture: null,
+      userUsername: null
     };
     window.localStorage.setItem("user", JSON.stringify(userStore));
   };
 
   componentDidMount() {
-    this.setState(JSON.parse(window.localStorage.getItem("user")).userInfo);
+    let userInfo = window.localStorage.getItem("user");
+    if (userInfo) {
+      this.setState(JSON.parse(userInfo));
+    }
   }
 
   render() {
@@ -50,15 +51,15 @@ class App extends React.Component {
     return (
       <div>
         <div id="background" />
+        <Header
+          loggedInName={loggedInName}
+          userPicture={userPicture}
+          logInUser={this.logInUser}
+          logOutUser={this.logOutUser}
+        />
         <div id="content">
-          <Header
-            loggedInName={loggedInName}
-            userPicture={userPicture}
-            logInUser={this.logInUser}
-            logOutUser={this.logOutUser}
-          />
           <Router>
-            <Articles path="/" />
+            <Articles path="/" userUsername={userUsername} />
             <SingleArticle
               path="/articles/:article_id"
               userUsername={userUsername}

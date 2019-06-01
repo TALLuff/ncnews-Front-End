@@ -4,6 +4,7 @@ import { fetchTopics } from "../api";
 class ArticlesQuery extends React.Component {
   state = {
     topics: [],
+    sort: "date_created",
     topicSelected: undefined,
     userSearch: undefined
   };
@@ -18,6 +19,10 @@ class ArticlesQuery extends React.Component {
 
   storeInput = event => {
     this.setState({ [event.target.id]: event.target.value });
+  };
+
+  storeInputSort = event => {
+    this.setState({ sort: event.target.id });
   };
 
   storeInputDropdown = event => {
@@ -38,70 +43,55 @@ class ArticlesQuery extends React.Component {
           onSubmit={event => {
             event.preventDefault();
             specifyArticles({
+              sort_by: this.state.sort,
               topic: this.state.topicSelected,
               author: this.state.userSearch
             });
           }}
         >
-          <select id="sorts" className="restyle redLeft">
-            <option disabled>Sort by</option>
-            <option
-              onClick={() =>
-                specifyArticles({
-                  sort_by: "created_at",
-                  topic: this.state.topicSelected,
-                  author: this.state.userSearch
-                })
-              }
+          <div>
+            <span className="restyleNo redLeft">Sort:</span>
+            <select id="sorts" className="restyle">
+              <option disabled>Sort by</option>
+              <option id="created_at" onClick={this.storeInputSort}>
+                Date Created
+              </option>
+              <option id="comment_count" onClick={this.storeInputSort}>
+                Comment Count
+              </option>
+              <option id="votes" onClick={this.storeInputSort}>
+                Vote Count
+              </option>
+            </select>
+          </div>
+          <div>
+            <span className="restyleNo redLeft">Filter:</span>
+            <select
+              defaultValue="Articles by Topic"
+              onChange={this.storeInputDropdown}
+              id="topicSelected"
+              className="restyle"
             >
-              Date Created
-            </option>
-            <option
-              onClick={() =>
-                specifyArticles({
-                  sort_by: "comment_count",
-                  topic: this.state.topicSelected,
-                  author: this.state.userSearch
-                })
-              }
-            >
-              Comment Count
-            </option>
-            <option
-              onClick={() =>
-                specifyArticles({
-                  sort_by: "votes",
-                  topic: this.state.topicSelected,
-                  author: this.state.userSearch
-                })
-              }
-            >
-              Vote Count
-            </option>
-          </select>
-          <select
-            defaultValue="Articles by Topic"
-            onChange={this.storeInputDropdown}
-            id="topicSelected"
-            className="restyle"
-          >
-            <option disabled>Articles by Topic</option>
-            <option>All</option>
-            {topics.map(({ slug }) => {
-              let cap = slug[0].toUpperCase() + slug.slice(1);
-              return <option key={slug}>{cap}</option>;
-            })}
-          </select>
-          <input
-            type="text"
-            placeholder="Articles by User"
-            onChange={this.storeInput}
-            id="userSearch"
-            className="restyle redLeft"
-          />
-          <button type="submit" className="restyle">
-            Search
-          </button>
+              <option disabled>Articles by Topic</option>
+              <option>All</option>
+              {topics.map(({ slug }) => {
+                let cap = slug[0].toUpperCase() + slug.slice(1);
+                return <option key={slug}>{cap}</option>;
+              })}
+            </select>
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Articles by User"
+              onChange={this.storeInput}
+              id="userSearch"
+              className="restyle redLeft restyleEx"
+            />
+            <button type="submit" className="restyle restyleEx">
+              Search
+            </button>
+          </div>
         </form>
       </div>
     );

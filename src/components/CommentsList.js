@@ -18,10 +18,14 @@ function CommentsList({
                 {comment.votes}
               </h5>
               <p>{comment.body}</p>
-              {showDeleteQuery(comment.author, comment.comment_id)}
+              {showDeleteQuery(comment.author, comment.comment_id, "comment")}
             </div>
             {userUsername ? (
-              <CommentButtons comment={comment} incrementVote={incrementVote} />
+              <CommentButtons
+                comment={comment}
+                incrementVote={incrementVote}
+                userUsername={userUsername}
+              />
             ) : (
               <div />
             )}

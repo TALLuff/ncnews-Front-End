@@ -1,5 +1,5 @@
 import React from "react";
-import ncnewsTitle from "../images/ncnewsTitle.png";
+import ncnewsTitle from "../images/ncnewsFooter.png";
 
 function Footer() {
   return (
