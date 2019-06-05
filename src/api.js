@@ -1,6 +1,6 @@
-const axios = require("axios");
+import axios from "axios";
 
-exports.fetchArticles = async (query = undefined) => {
+export const fetchArticles = async (query = undefined) => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/articles`;
   const {
     data: { articles }
@@ -8,7 +8,7 @@ exports.fetchArticles = async (query = undefined) => {
   return articles;
 };
 
-exports.fetchTopics = async () => {
+export const fetchTopics = async () => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/topics`;
   const {
     data: { topics }
@@ -16,7 +16,7 @@ exports.fetchTopics = async () => {
   return topics;
 };
 
-exports.fetchUser = async username => {
+export const fetchUser = async username => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/users/${username}`;
   const {
     data: { user }
@@ -24,7 +24,7 @@ exports.fetchUser = async username => {
   return user;
 };
 
-exports.fetchArticleById = async id => {
+export const fetchArticleById = async id => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/articles/${id}`;
   const {
     data: { article }
@@ -32,7 +32,7 @@ exports.fetchArticleById = async id => {
   return article;
 };
 
-exports.fetchArticlesComments = async id => {
+export const fetchArticlesComments = async id => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/articles/${id}/comments`;
   const {
     data: { comments }
@@ -40,7 +40,7 @@ exports.fetchArticlesComments = async id => {
   return comments;
 };
 
-exports.createArticleComment = async (id, commentInput) => {
+export const createArticleComment = async (id, commentInput) => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/articles/${id}/comments`;
   const {
     data: { comment }
@@ -48,17 +48,17 @@ exports.createArticleComment = async (id, commentInput) => {
   return [comment];
 };
 
-exports.removeArticleComment = async id => {
+export const removeArticleComment = async id => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/comments/${id}`;
   axios.delete(url);
 };
 
-exports.updateVote = async (type, id, inc) => {
+export const updateVote = async (type, id, inc) => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/${type}/${id}`;
   axios.patch(url, inc);
 };
 
-exports.createArticle = async articleInput => {
+export const createArticle = async articleInput => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/articles`;
   const {
     data: { article }
@@ -66,7 +66,7 @@ exports.createArticle = async articleInput => {
   return [article];
 };
 
-exports.removeArticle = async id => {
+export const removeArticle = async id => {
   const url = `https://nc-news-northcoders.herokuapp.com/api/articles/${id}`;
   axios.delete(url);
 };

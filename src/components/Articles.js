@@ -2,7 +2,7 @@ import React from "react";
 import ArticlesQuery from "./ArticlesQuery";
 import PostArticle from "./PostArticle";
 import ArticlesList from "./ArticlesList";
-import { fetchArticles, createArticle } from "../api";
+import { fetchArticles, createArticle } from "../api.js";
 import { navigate } from "@reach/router";
 
 class Articles extends React.Component {
