@@ -22,10 +22,10 @@ Back-end repo - https://github.com/TALLuff/BEND_nc-news
   
 ### Built With
 
-React - https://reactjs.org/
-Axios - https://github.com/axios/axios
-Node - https://nodejs.org
-Reach Router - https://reach.tech/router
+-React - https://reactjs.org/
+-Axios - https://github.com/axios/axios
+-Node - https://nodejs.org
+-Reach Router - https://reach.tech/router
 
 
 ## Directions to run locally
