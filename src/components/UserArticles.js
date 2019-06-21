@@ -31,7 +31,7 @@ class UserArticles extends React.Component {
         <ArticlesList articles={articles} />
       </div>
     ) : (
-      <div>Loading Articles...</div>
+      <div className="loading">Loading Articles...</div>
     );
   }
 }

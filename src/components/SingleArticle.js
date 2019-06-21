@@ -135,7 +135,7 @@ class SingleArticle extends React.Component {
         />
       </div>
     ) : (
-      <div>Loading Article...</div>
+      <div className="loading">Loading Article...</div>
     );
   }
 }

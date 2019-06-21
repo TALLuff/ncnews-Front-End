@@ -300,6 +300,12 @@ a:focus {
   }
 }
 
+.loading {
+  padding: 5%;
+  font-size: 1em;
+  text-align: center;
+}
+
 #not-found {
   text-align: center;
   padding: 20px;
