@@ -89,10 +89,10 @@ class ArticlesQuery extends React.Component {
               id="userSearch"
               className="restyle"
             />
-            <button type="submit" className="restyle refineSearch">
-              Refine Search
-            </button>
           </div>
+          <button type="submit" className="restyle darkButton">
+            Refine Search
+          </button>
         </form>
       </div>
     );

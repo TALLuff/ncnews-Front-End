@@ -12,8 +12,8 @@ class PostComment extends React.Component {
   render() {
     const { userUsername, postNewComment } = this.props;
     return userUsername ? (
-      <div>
-        Post Comment:
+      <div className="postForm">
+        <span className="postLabel">Post Comment:</span>
         <form
           onSubmit={event => {
             event.preventDefault();
@@ -30,7 +30,7 @@ class PostComment extends React.Component {
             className="restyle"
             value={this.state.commentBody}
           />
-          <button type="submit" className="restyle">
+          <button type="submit" className="restyle darkButton postButton">
             Submit
           </button>
         </form>

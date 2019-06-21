@@ -33,24 +33,25 @@ class PostArticle extends React.Component {
     const { userUsername, postNewArticle } = this.props;
     const { articleTitle, articleTopic, articleBody } = this.state;
     return userUsername ? (
-      <div>
-        <br />
-        Post Article:
+      <div className="postForm">
+        <div>
+          <span className="postLabel">Post Article:</span>
+        </div>
         <form
           onSubmit={event => {
             event.preventDefault();
             postNewArticle(articleTitle, articleTopic, articleBody);
           }}
         >
-          <div id="postArticle">
+          <div className="row">
             <input
               placeholder="Article Title"
-              className="restyle restyleEx redLeft"
+              className="restyle restyleEx"
               onChange={this.storeInputTitle}
               required
             />
             <div>
-              <span className="restyleNo redLeft">Select:</span>
+              <span className="restyleNo">Select:</span>
               <select
                 defaultValue="Articles Topic"
                 onChange={this.storeInputTopic}
@@ -65,20 +66,18 @@ class PostArticle extends React.Component {
                 })}
               </select>
             </div>
-          </div>
-          <div id="postBody">
             <textarea
               placeholder="Article description"
               onChange={this.storeInputBody}
               required
               id="postArticleInput"
-              className="restyle redLeft"
+              className="restyle"
               value={this.state.articleBody}
             />
-            <button type="submit" className="restyle">
-              Submit
-            </button>
           </div>
+          <button type="submit" className="restyle darkButton postButton">
+            Submit
+          </button>
         </form>
       </div>
     ) : (

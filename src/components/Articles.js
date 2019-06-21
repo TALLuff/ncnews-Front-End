@@ -34,7 +34,6 @@ class Articles extends React.Component {
       body
     };
     createArticle(articleInfo).then(([article]) => {
-      console.log(article);
       navigate(`/articles/${article.article_id}`);
     });
   };

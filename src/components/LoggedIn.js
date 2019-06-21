@@ -4,13 +4,8 @@ import { Link } from "@reach/router";
 function Title({ loggedInName, userPicture, logOutUser }) {
   return (
     <div id="loggedIn">
-      {/* <span id="loggedInText">
-        {" "}
-        Welcome back
-        <br /> {loggedInName}{" "}
-      </span> */}
       <div>
-        <span className="restyleNo">{loggedInName}</span>
+        <span className="restyleNo loggedInName">{loggedInName}</span>
         <button onClick={() => logOutUser()} className="restyle">
           Log Out
         </button>
