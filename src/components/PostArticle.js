@@ -82,7 +82,7 @@ class PostArticle extends React.Component {
         </form>
       </div>
     ) : (
-      <div>Please log in to post an Article.</div>
+      <div className="loginText redLeft">Please log in to post an Article.</div>
     );
   }
 }

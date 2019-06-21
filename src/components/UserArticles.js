@@ -25,8 +25,9 @@ class UserArticles extends React.Component {
     const { articles } = this.state;
     return articles ? (
       <div>
-        <h3>Welcome to your home page {this.props.userUsername}</h3>
-        Your articles:
+        <h3 className="loggedInText redLeft">
+          Welcome to your home page {this.props.userUsername}
+        </h3>
         <ArticlesList articles={articles} />
       </div>
     ) : (

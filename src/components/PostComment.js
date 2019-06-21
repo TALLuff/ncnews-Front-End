@@ -36,7 +36,7 @@ class PostComment extends React.Component {
         </form>
       </div>
     ) : (
-      <div>Please log in to comment or vote.</div>
+      <div className="loginText redLeft">Please log in to comment or vote.</div>
     );
   }
 }
