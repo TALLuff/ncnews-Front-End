@@ -11,10 +11,18 @@ a:focus {
   text-decoration: none;
 }
 
-#background {
+/* #background {
   background-image: url("https://artwallbazaar.com/wp-content/uploads/dancing-arrows-geometric-pattern-wallpaper-mural-black-white.jpg");
   background-size: 200px;
   opacity: 0.03;
+  position: fixed;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+} */
+
+#background {
+  background-color: rgb(238, 237, 237);
   position: fixed;
   z-index: -1;
   height: 100%;
@@ -63,26 +71,32 @@ a:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2% 0% 2% 0%;
+  margin: 2% 1% 2% 1%;
   padding: 1%;
   background-color: rgba(48, 48, 48, 0.555);
   color: white;
   border-left: 2px solid red;
 }
 
+.articleListItem {
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  transition: margin 1s;
+}
+
 .listItemTitle {
   margin: 0px;
-  color: rgb(235, 235, 235);
+  color: rgb(245, 245, 245);
 }
 
 .commentTitle {
   margin: 0px;
 }
 
-.listItemTitle:hover {
-  color: rgb(255, 255, 255);
+.articleListItem:hover {
+  background-color: rgba(48, 48, 48, 0.655);
   position: relative;
-  left: 5px;
+  margin: 2% 0% 2% 2%;
 }
 .voteButtons {
   display: flex;
