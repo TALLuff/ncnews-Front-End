@@ -50,7 +50,7 @@ class ArticlesQuery extends React.Component {
           }}
         >
           <div>
-            <span className="restyleNo redLeft">Sort:</span>
+            <span className="restyleNo">Order:</span>
             <select id="sorts" className="restyle">
               <option disabled>Sort by</option>
               <option id="created_at" onClick={this.storeInputSort}>
@@ -81,15 +81,16 @@ class ArticlesQuery extends React.Component {
             </select>
           </div>
           <div>
+            <span className="restyleNo redLeft">Search:</span>
             <input
               type="text"
               placeholder="Articles by User"
               onChange={this.storeInput}
               id="userSearch"
-              className="restyle redLeft restyleEx"
+              className="restyle"
             />
-            <button type="submit" className="restyle restyleEx">
-              Search
+            <button type="submit" className="restyle refineSearch">
+              Refine Search
             </button>
           </div>
         </form>
